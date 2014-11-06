@@ -8,22 +8,50 @@ require "rsgejob"
 script = <<EOF
 #!/bin/bash
 #
-
-sleep 1000000
+echo "hi"
+sleep 120
 EOF
 
 job = RsgeJob.new do |j|
-  j.job_name = "test_job"
-  j.cwd = true
-  j.script = script
-  j.hard_requests = { :mem_free => "1G", :pcpus => 1, :h_rt => "96:00:00" }
+ j.job_name = "test_job"
+ j.job_owner = "llschlit"
+ j.outfile = "hiout.out"
+ j.errfile = "hiout.err"
+#  j.wd = "/home/l/llschlit/rslurm/bin/"
+ j.wd = "/home/l/llschlit/"
+# j.cwd = true
+ j.script = script
+# j.hard_requests = { :mem_free => "1G", :pcpus => 1, :h_rt => "96:00:00" }
+ j.hard_requests = { "--mem" => "1G", "--time" => "0:05:00" }
 end
 
 job.submit
 
-puts "=== " + job.jobid + " ==="
-puts " -  " + job.job_name
-puts " -  " + job.cwd.to_s
+puts "=== "
+puts "job_id: " + job.jobid.to_s
+puts "job_name: " + job.job_name.to_s
+puts "slots: " + job.slots.to_s
+puts "submission_time: " + job.submission_time.to_s
+puts "start_time: " + job.start_time.to_s
+puts "queue: " + job.queue.to_s
+puts "state: " + job.state.to_s
+puts "job_owner: " + job.job_owner.to_s
+#puts "pe: " + job.pe.to_s
+#puts "pe_slots: " + job.pe_slots.to_s
+puts "reservation: " + job.reservation.to_s
+puts "cwd: " + job.cwd.to_s
+puts "wd: " + job.wd.to_s
+puts "hard_resreq: " + job.hard_resreq.to_s
+#puts "soft_resreq: " + job.soft_resreq.to_s
+puts "joinout: " + job.joinout.to_s
+puts "outfile: " + job.outfile.to_s
+puts "errfile: " + job.errfile.to_s
+puts "queue_name: " + job.queue_name.to_s
+puts "valid: " + job.valid.to_s
+puts "hard_requests: " + job.hard_requests.to_s
+#puts "soft_requests: " + job.soft_requests.to_s
+puts "script:"
+puts job.script.to_s
 puts "==="
-puts job.script
-puts "==="
+
+# job.delete

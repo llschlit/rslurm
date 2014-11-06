@@ -1,7 +1,10 @@
-rsge
+Slurm/SGE
 ====
 
-Ruby bindings for GridEngine
+Ruby bindings for Simple Linux Utility Management/GridEngine
+###UNDER DEVELOPMENT###
+Working to abstract scheduler so that either Slurm or SGE can be selected
+through a setting with no other implementation changes required.
 
 Classes
 

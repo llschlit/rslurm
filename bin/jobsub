@@ -3,16 +3,18 @@
 # Test out submitting a job
 #
 
-require "rsgejob"
+require "rschedjob"
 
 script = <<EOF
 #!/bin/bash
 #
+#SBATCH -p saturn
+
 echo "hi"
 sleep 120
 EOF
 
-job = RsgeJob.new do |j|
+job = RSchedJob.new do |j|
  j.job_name = "test_job"
  j.job_owner = "llschlit"
  j.outfile = "hiout.out"

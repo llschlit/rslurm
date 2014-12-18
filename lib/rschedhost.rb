@@ -1,7 +1,7 @@
-# RsgeHost has methods for obtaining information about hosts in a GridEngine
+# RSchedHost has methods for obtaining information about hosts in a GridEngine
 # environment.  Eventually, we will also include methods for setting host 
 # complex values, enabling/disabling, add/remove, hostgroup associations, etc.
-class RsgeHost
+class RSchedHost
   # instantiate new object in a "overloaded" way
   # * Without arguments, we can provide a hostlist
   # * With an argument (e.g. a host), we can provide the details of the host
@@ -15,7 +15,7 @@ class RsgeHost
         if ($rspec_init == true)
           @hosts = open("sample_data/host_list.txt").read.split("\n")
         else
-          (output, error) = RsgeUtil.execio "qconf -sel", nil
+          (output, error) = RSchedUtil.execio "qconf -sel", nil
           @hosts = output.split("\n")
         end
       end
@@ -25,7 +25,7 @@ class RsgeHost
         output = fa.read
         fa.close
       else
-        (output, error) = RsgeUtil.execio "qconf -se #{@host}", nil
+        (output, error) = RSchedUtil.execio "qconf -se #{@host}", nil
       end
 
       str = output.split("\n")
@@ -52,7 +52,7 @@ class RsgeHost
 
         nextline = nil
         lastline = false
-        Rails.logger.debug "RsgeHost.new() => " + line
+        Rails.logger.debug "RSchedHost.new() => " + line
 
         if line.match(/^complex_values[ ]+.*/)
           line.gsub!(/complex_values[ ]+/, "")
@@ -77,7 +77,7 @@ class RsgeHost
       if ($rspec_init == true)
         @hosts = open("sample_data/host_list.txt").read.split("\n")
       else
-        (output, error) = RsgeUtil.execio "qconf -sel", nil
+        (output, error) = RSchedUtil.execio "qconf -sel", nil
         @hosts = output.split("\n")
       end
     end 
@@ -88,14 +88,14 @@ class RsgeHost
     @hosts.sort
   end 
 
-  # for each host, return a new RsgeHost
+  # for each host, return a new RSchedHost
   def each
     @hosts.sort.each do |host|
-      yield RsgeHost.new(host)
+      yield RSchedHost.new(host)
     end 
   end
 
-  # hostname of the current RsgeHost
+  # hostname of the current RSchedHost
   def name
     @host
   end

@@ -1,4 +1,4 @@
-class RsgeReq
+class RSchedReq
     def initialize(param, value)
 
         if (!defined?(@@complexList))

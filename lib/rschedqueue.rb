@@ -2,10 +2,10 @@ require 'time'
 require 'rexml/document'
 require 'rubygems'
 require 'nokogiri'
-require 'rsgeutil'
+require 'rschedutil'
 
-class RsgeQueue
-    extend RsgeUtil
+class RSchedQueue
+    extend RSchedUtil
     hash_accessor :queue, :name, :load, :used, :resv, :avail, :total
 
     # Create a new object which represents all queues or a specified queue
@@ -27,7 +27,7 @@ class RsgeQueue
 
     def each
         self.list.each do |queue|
-            yield RsgeQueue.new(queue)
+            yield RSchedQueue.new(queue)
         end
     end
 
@@ -42,7 +42,7 @@ class RsgeQueue
         if ($rspec_init == true)
             doc = Nokogiri::XML(open("sample_data/queue_status.xml"))
         else
-            (output, error) = RsgeUtil.execio "qstat -g c -ext -xml", nil
+            (output, error) = RSchedUtil.execio "qstat -g c -ext -xml", nil
             doc = Nokogiri::XML(output)
         end
 

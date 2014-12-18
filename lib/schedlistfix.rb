@@ -1,7 +1,7 @@
 # This class will fix "ugly" list formatting
 # code and should negate effects by regex
 
-class SGElist < String
+class Schedlist < String
   def initialize(list)
     @list = list
   end

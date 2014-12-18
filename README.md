@@ -8,14 +8,14 @@ through a setting with no other implementation changes required.
 
 Classes
 
-+ rsgehost
-+ rsgejobs < rsgereq
-+ rsgequeue
-+ rsgereq
++ rschedhost
++ rschedjobs < rschedreq
++ rschedqueue
++ rschedreq
 
-## rsgehost ##
+## rschedhost ##
 ~~~
-globalHost = Rsgehost.new("global")
+globalHost = RSchedhost.new("global")
 
 puts "Number of matlab licenses max for cluster: " + globalHost.complex_value(:matlab).to_s
 ~~~
@@ -25,9 +25,9 @@ puts "Number of matlab licenses max for cluster: " + globalHost.complex_value(:m
 + (array) load_list
 + (string) load_value
 
-## rsgejob ##
+## rschedjob ##
 ~~~
-jobs = Rsgejob.new
+jobs = RSchedjob.new
 
 jobs.each do |job|
     puts job.jobid + " " + job.owner + " " + job.state
@@ -38,7 +38,7 @@ end
 3 user1 r
 4 user3 w
 ~~~
-### Methods (rsgejob) ###
+### Methods (rschedjob) ###
 + each
 + list
 + jobid
@@ -54,17 +54,17 @@ end
 + softRequestList
 + softRequest
 
-## rsgequeue ##
+## rschedqueue ##
 ~~~
-require 'rsgequeue'
+require 'rschedqueue'
 
-queues = Rsgequeue.new
+queues = RSchedqueue.new
 
 queues.each do |queue|
     puts queue.name.to_s + " " + queue.used.to_s + " " + queue.available.to_s + " " + queue.total.to_s
 end
 ~~~
-### Methods (rsgequeue) ###
+### Methods (rschedqueue) ###
 + list
 + each
 + name
@@ -75,5 +75,5 @@ end
 + total
 + disabled
 
-## rsgehost ##
+## rschedhost ##
 Still under development... not expected to work.
